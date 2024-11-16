@@ -23,7 +23,7 @@ public class LookAt : MonoBehaviour
 
             if (targetRotation.x < -70f)
                 targetRotation = Quaternion.Euler(-70f, targetRotation.y, targetRotation.z);
-            else if (targetRotation.x > 0f)
+            else if (targetRotation.x > 15f)
                 targetRotation = Quaternion.Euler(0f, targetRotation.y, targetRotation.z);
 
 
