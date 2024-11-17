@@ -9,9 +9,12 @@ public class DetectVision : MonoBehaviour
     public int maxAngle;
     public int raysPerCircle = 1;
     public int distancia;
-    public LayerMask layerMask;
+    public float necessaryHideTime;
+    private LayerMask layerMask;
     private Vector3 direccion;
     private bool detected;
+    private bool inView;
+    private float unseenTime;
 
     private void Start()
     {
@@ -21,12 +24,20 @@ public class DetectVision : MonoBehaviour
             maxAngle = 65;
         else if (maxAngle <= 0)
             maxAngle = 1;
+
+        unseenTime = 0;
+
+        layerMask = LayerMask.GetMask("Player", "Terrain", "Wall", "Floor"); //AÑADIR MAS LAYERS QUE OBSTACULIZAN
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         LightCone();
+        if(!inView)
+        {
+            unseenTime += Time.unscaledDeltaTime;
+        }
     }
 
     public void LightCone()
@@ -47,12 +58,26 @@ public class DetectVision : MonoBehaviour
                 direccion = thisHead.TransformDirection(direccion);
 
                 Debug.DrawRay(transform.position, direccion * distancia, Color.red);
-                if (Physics.Raycast(transform.position, direccion, out RaycastHit hit, distancia, layerMask))
+                if(Physics.Raycast(transform.position, direccion, out RaycastHit hit, distancia, layerMask))
                 {
-                    detected = true;
-                    Debug.Log(detected);
+                    if (hit.collider.tag != "Player")
+                    {
+                        inView = false;
+                    }
+                    else 
+                    {
+                        unseenTime = 0;
+                        detected = true;
+                        inView = true;
+                        Debug.Log(detected);
+                        return;
+                    }
                 }
 
+                if (unseenTime >= necessaryHideTime)
+                {
+                    detected = false;
+                }
             }
         }
     }
