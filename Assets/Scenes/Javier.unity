@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 2039787533}
   - component: {fileID: 2039787532}
   - component: {fileID: 2039787531}
+  - component: {fileID: 2039787534}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -804,6 +805,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039787529}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2039787534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039787529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf577382da2e4db40b9360a83cc8f7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisHead: {fileID: 2039787530}
+  amountCircels: 20
+  maxAngle: 30
+  raysPerCircle: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
