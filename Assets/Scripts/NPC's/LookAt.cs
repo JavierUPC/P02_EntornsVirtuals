@@ -10,7 +10,7 @@ public class LookAt : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!thisHead.gameObject.GetComponent<DetectVision>().Detected())
+        if (!thisHead.gameObject.GetComponent<DetectVision>().Detected() || !thisHead.gameObject.GetComponent<DetectAudio>().Detected())
             return;
 
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));

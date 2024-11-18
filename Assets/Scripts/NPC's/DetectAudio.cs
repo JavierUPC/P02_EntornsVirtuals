@@ -26,7 +26,7 @@ public class DetectAudio : MonoBehaviour
             undetectedTime += Time.unscaledDeltaTime;
         }
 
-        if (undetectedTime >= silentTimeNeeded)
+        if ((undetectedTime >= silentTimeNeeded) && !firstDetected)
         {
             detected = false;
             undetectedTime = 0;
