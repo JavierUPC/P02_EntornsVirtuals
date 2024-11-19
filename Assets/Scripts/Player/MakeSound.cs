@@ -40,31 +40,31 @@ public class MakeSound : MonoBehaviour
             );
 
             Debug.DrawRay(transform.position, direction * distanciaRun, Color.red);
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distanciaRun, layerMask))
-            {
-                if (hit.collider.tag != "Enemy")
-                {
-                    noContact = true;
-                }
-                else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 1 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
-                }
-                else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 0 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaWalk)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
-                }
-                else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 2 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaCrouch)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
-                }
-            }
+            //if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distanciaRun, layerMask))
+            //{
+            //    if (hit.collider.tag != "Enemy")
+            //    {
+            //        noContact = true;
+            //    }
+            //    else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 1 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
+            //    {
+            //        hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+            //        noContact = false;
+            //        return;
+            //    }
+            //    else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 0 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaWalk)
+            //    {
+            //        hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+            //        noContact = false;
+            //        return;
+            //    }
+            //    else if (hit.collider.tag == "Enemy" && GetComponent<PlayerMovement>().MovementType() == 2 && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaCrouch)
+            //    {
+            //        hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+            //        noContact = false;
+            //        return;
+            //    }
+            //}
         }
     }
 }
