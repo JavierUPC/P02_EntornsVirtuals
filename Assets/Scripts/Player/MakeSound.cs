@@ -14,7 +14,7 @@ public class MakeSound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        layerMask = LayerMask.GetMask("Player", "Terrain", "Wall", "Floor");
+        layerMask = LayerMask.GetMask("Player", "Terrain", "Wall", "Floor", "Enemy");
         noContact = true;
     }
 
