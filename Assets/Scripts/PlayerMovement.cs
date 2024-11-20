@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-
 public void Move()
 {
         // Obtener las entradas del teclado (WASD)
