@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerMovement : MonoBehaviour
+public class Provisional : MonoBehaviour
 {
     public float moveSpeed = 5f; // Velocidad de movimiento del jugador
 
@@ -25,5 +25,11 @@ public void Move()
         // Mover al jugador
         transform.Translate(movement);
     }
+
+public void PlayerMovement()
+    {
+        //cosa return sonido
+    }
 }
+
 
