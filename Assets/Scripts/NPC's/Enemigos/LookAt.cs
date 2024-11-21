@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
+    //private Vector3 lookAt;
     public Transform target;
     public Transform thisHead; 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!thisHead.gameObject.GetComponent<DetectVision>().Detected() /*|| !thisHead.gameObject.GetComponent<DetectAudio>().Detected()*/)
+        if (!thisHead.gameObject.GetComponent<DetectVision>().Detected() || !thisHead.gameObject.GetComponent<DetectAudio>().Detected())
             return;
 
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
@@ -30,4 +31,9 @@ public class LookAt : MonoBehaviour
             thisHead.rotation = targetRotation;
         }
     }
+
+    //public void moveCoords(Vector3 coords)
+    //{
+    //    lookAt = coords;
+    //}
 }
