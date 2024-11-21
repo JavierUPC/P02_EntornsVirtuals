@@ -221,8 +221,8 @@ Transform:
   m_GameObject: {fileID: 198400970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 569.6, y: -3.7, z: -368.5}
-  m_LocalScale: {x: 878.8866, y: 1, z: 854.689}
+  m_LocalPosition: {x: 788.7, y: -3.7, z: -648.8}
+  m_LocalScale: {x: 91.09621, y: 1, z: 82.714905}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -404,12 +404,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d33161102b68440a66092ac9a8b688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloorChecker: {fileID: 0}
-  ArmsAnimaton: {fileID: 0}
-  moveSpeed: 5
-  jumpForce: 5
-  mouseSens: 100
+  animator: {fileID: 941721099}
+  cameraRef: {fileID: 578786029}
+  speed: 5
   runSpeed: 12
+  crouchSpeed: 3
+  jumpForce: 5
+  rb: {fileID: 941721100}
+  groundCheck: {fileID: 198400974}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &941721103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f9394ec5b8488f84cb094a11ca733bbd, type: 3}
@@ -674,7 +680,6 @@ GameObject:
   - component: {fileID: 1334362803}
   - component: {fileID: 1334362802}
   - component: {fileID: 1334362801}
-  - component: {fileID: 1334362804}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -749,28 +754,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334362800}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08061352, y: -0, z: -0, w: 0.9967454}
-  m_LocalPosition: {x: 794.77, y: 6.61, z: -656.27}
+  m_LocalRotation: {x: 0.08061353, y: -0, z: -0, w: 0.99674547}
+  m_LocalPosition: {x: 794.77, y: 21.7, z: -686.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 9.248, y: 0, z: 0}
---- !u!114 &1334362804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334362800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c400b5729f00f48b352f9e8fb00f85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 578786029}
-  mouseSens: 401.3
-  isFirstPerson: 0
 --- !u!1 &1715375085
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,5 +862,5 @@ SceneRoots:
   - {fileID: 1715375087}
   - {fileID: 198400974}
   - {fileID: 417781701}
-  - {fileID: 1075712216}
   - {fileID: 1334362803}
+  - {fileID: 1075712216}

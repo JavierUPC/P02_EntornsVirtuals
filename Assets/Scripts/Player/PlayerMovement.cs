@@ -1,133 +1,86 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject FloorChecker;
-    public Animator ArmsAnimaton; // Aseg�rate de que este es el nombre correcto
+    public Animator animator;             // Referencia al Animator
+    public Transform cameraRef;          // Referencia a la cámara
+    public float speed = 5f;             // Velocidad al caminar
+    public float runSpeed = 8f;          // Velocidad al correr
+    public float crouchSpeed = 2.5f;     // Velocidad al agacharse
+    public float jumpForce = 5f;         // Fuerza del salto
+    public Rigidbody rb;                 // Rigidbody del jugador
+    public Transform groundCheck;        // Punto para verificar si el jugador está tocando el suelo
+    public float groundDistance = 0.4f;  // Distancia para la verificación de suelo
+    public LayerMask groundMask;         // Máscara de la capa del suelo
 
+    private Vector3 movement;            // Dirección de movimiento
+    private bool isGrounded;             // Si está en el suelo
+    private float yRotation = 0f;        // Rotación de la cámara en el eje Y (para rotar el jugador)
 
-    private Rigidbody rb;
-    private Collider coll;
-    private bool floored;
-
-    public float moveSpeed = 6f;
-    public float jumpForce = 10f;
-
-    public float mouseSens = 100f;
-    private float rotationX;
-
-    private float mouseX, moveX, moveZ;
-    private float timer;
-    public float runSpeed = 12f;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
-        floored = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        rotationX = 0f;
-        timer = 0;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal");
-        moveZ = Input.GetAxis("Vertical");
+        // Verificar si está tocando el suelo
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        // Detectar entrada del teclado
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector3(move.x * moveSpeed, rb.velocity.y, move.z * moveSpeed);
+        // Calcular dirección de movimiento
+        Vector3 forward = cameraRef.forward;
+        Vector3 right = cameraRef.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        movement = (forward * vertical + right * horizontal).normalized;
+
+        // Ajustar velocidad base
+        float currentSpeed = speed;
+
+        // Estados de animación
+        bool isWalking = movement.magnitude > 0 && vertical >= 0;
+        bool isWalkingBack = vertical < 0;
+        bool isCrouching = Input.GetKey(KeyCode.LeftControl);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
+        bool isCrouchWalking = isWalking && isCrouching;
 
 
-        if (moveX != 0 || moveZ != 0) // Si el personaje se está moviendo
+        // Ajustar velocidad según el estado
+        if (isRunning)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && floored && FloorChecker.GetComponent<Floored>().IsFloored()) // Si está corriendo
-            {
-                ArmsAnimaton.SetBool("isRunning", true); // Activar la animación de correr
-                ArmsAnimaton.SetBool("isWalking", false); // Desactivar la animación de caminar
-            }
-            else // Si está caminando
-            {
-                ArmsAnimaton.SetBool("isWalking", true); // Activar la animación de caminar
-                ArmsAnimaton.SetBool("isRunning", false); // Desactivar la animación de correr
-            }
+            currentSpeed = runSpeed;
         }
-        else // Si el personaje está quieto
+        else if (isCrouching)
         {
-            ArmsAnimaton.SetBool("isWalking", false); // Activar la animación de idle
-            ArmsAnimaton.SetBool("isRunning", false); // Desactivar la animación de correr
-        }
-
-        if (!floored && !FloorChecker.GetComponent<Floored>().IsFloored()) // Si el personaje está en el aire
-        {
-            ArmsAnimaton.SetBool("isJumping", true); // Activar la animación de saltar
-        }
-        else // Si el personaje está en el suelo
-        {
-            ArmsAnimaton.SetBool("isJumping", false); // Desactivar la animación de saltar
-        }
-
-
-
-
-        //Salto - el "airtime" depende del tiempo que se mantenga el bot�n presionado
-        if (floored && Input.GetKeyDown(KeyCode.Space) && FloorChecker.GetComponent<Floored>().IsFloored())
-        {
-            timer += Time.deltaTime;
-            Debug.Log("Jump1");
-        }
-        else if (Input.GetKey(KeyCode.Space) && timer > 0 && timer <= 0.5)
-        {
-            Debug.Log("Jump2");
-            timer += Time.deltaTime;
-            Jump();
-        }
-        else if (Input.GetKeyUp(KeyCode.Space) || timer > 0.5)
-        {
-            Debug.Log("Jump3");
-            timer = 0;
+            currentSpeed = crouchSpeed;
         }
 
-        //codigo correr
-        if (Input.GetKey(KeyCode.LeftShift) && floored && FloorChecker.GetComponent<Floored>().IsFloored())
-        {
-            Debug.Log("Corre");
-            Correr(move);
-        }
+        // Aplicar movimiento al jugador
+        Vector3 velocity = movement * currentSpeed;
+        velocity.y = rb.velocity.y; // Mantener la velocidad vertical
+        rb.velocity = velocity;
 
-        //Rotacion horizontal del personaje segun el movimiento del raton
-        mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
-        rotationX += mouseX;
-        transform.rotation = Quaternion.Euler(0f, rotationX, 0f);
+        // Rotar al jugador hacia la cámara
+        float mouseX = Input.GetAxis("Mouse X");
+        yRotation += mouseX;
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+
+        // Configurar animaciones
+        animator.SetBool("IsWalking", isWalking && !isRunning && !isCrouching);
+        animator.SetBool("IsWalkingBack", isWalkingBack);
+        animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsCrouching", isCrouching);
+        animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
+
+        // Saltar
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetTrigger("IsJumping");
+        }
     }
-
-    private void Correr(Vector3 movimiento)
-    {
-
-        rb.velocity = new Vector3(movimiento.x * runSpeed, rb.velocity.y, movimiento.z * runSpeed);
-    }
-
-    private void Jump()
-    {
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce / (1 + Mathf.Pow(timer, 2)), rb.velocity.z);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-            floored = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-            floored = false;
-    }
-
 }
