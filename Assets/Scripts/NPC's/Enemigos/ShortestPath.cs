@@ -29,10 +29,6 @@ public class ShortestPath : MonoBehaviour
         RaycastHit hitObsticle;
         if (Physics.Raycast(transform.position, targetLine, out hitObsticle, Vector3.Distance(target.position, transform.position), detectMasks))
         {
-            Vector3 objectSize = hitObsticle.transform.lossyScale;
-            Vector3 objectRotation = hitObsticle.transform.rotation.eulerAngles;
-            Vector3 objectPosition = hitObsticle.transform.position;
-
             Bounds bounds = hitObsticle.collider.bounds;
 
             Vector3[] corners = new Vector3[8];
