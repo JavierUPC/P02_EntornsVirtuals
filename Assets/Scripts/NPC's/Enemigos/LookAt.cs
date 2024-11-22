@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
-    //private Vector3 lookAt;
+    private Vector3 lookAt;
     public Transform target;
     public Transform thisHead; 
 
@@ -32,8 +32,8 @@ public class LookAt : MonoBehaviour
         }
     }
 
-    //public void moveCoords(Vector3 coords)
-    //{
-    //    lookAt = coords;
-    //}
+    public void MoveCoords(Vector3 coords)
+    {
+        lookAt = coords;
+    }
 }

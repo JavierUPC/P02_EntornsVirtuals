@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShortestPath : MonoBehaviour
 {
     public Transform target;
+    private Vector3 targetPath;
 
     [SerializeField]
     public LayerMask detectMasks;
@@ -80,10 +81,19 @@ public class ShortestPath : MonoBehaviour
                 SetPath(leftPoint);
             }
         }
+        else
+        {
+            SetPath(target.position);
+        }
     }
 
     private void SetPath(Vector3 targetPos)
     {
+        GivePath(new Vector3(targetPos.x, transform.position.y, targetPos.x));
+    }
 
+    public void GivePath(Vector3 givenPath)
+    {
+        GetComponent<LookAt>().MoveCoords(givenPath);
     }
 }
