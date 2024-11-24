@@ -75,12 +75,23 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
 
-        // Saltar
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+
+        void Update()
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            animator.SetTrigger("IsJumping");
+            Debug.Log("Tecla de salto presionada: " + Input.GetKeyDown(KeyCode.Space));  // Esto debería mostrar si la tecla de espacio es detectada
+
+            // Verificar si está tocando el suelo
+            isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                animator.SetTrigger("IsJumping");
+            }
         }
+
+
     }
 }
