@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class UlisesPlayerMovement : MonoBehaviour
 {
     public Animator animator;             // Referencia al Animator
     public Transform cameraRef;          // Referencia a la cámara
