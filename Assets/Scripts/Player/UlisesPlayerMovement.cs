@@ -10,7 +10,7 @@ public class UlisesPlayerMovement : MonoBehaviour
     public float jumpForce = 5f;         // Fuerza del salto
     public Rigidbody rb;                 // Rigidbody del jugador
     public Transform groundCheck;        // Punto para verificar si el jugador está tocando el suelo
-    public float groundDistance = 0.4f;  // Distancia para la verificación de suelo
+    public float groundDistance = 0.1f;  // Distancia para la verificación de suelo
     public LayerMask groundMask;         // Máscara de la capa del suelo
 
     private Vector3 movement;            // Dirección de movimiento
