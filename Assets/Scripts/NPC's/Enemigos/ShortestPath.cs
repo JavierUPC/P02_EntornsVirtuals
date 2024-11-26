@@ -5,7 +5,8 @@ using UnityEngine;
 public class ShortestPath : MonoBehaviour
 {
     public Transform target;
-    private Vector3 targetPath;
+    public GameObject thisHead;
+    public float offset;
 
     [SerializeField]
     public LayerMask detectMasks;
@@ -24,10 +25,11 @@ public class ShortestPath : MonoBehaviour
 
     private void CheckObstacles ()
     {
-        Vector3 targetLine = target.position - transform.position;
+        Vector3 targetLine1 = new Vector3(target.position.x, target.position.y, target.position.y) - transform.position;
 
         RaycastHit hitObsticle;
-        if (Physics.Raycast(transform.position, targetLine, out hitObsticle, Vector3.Distance(target.position, transform.position), detectMasks))
+
+        if (Physics.Raycast(transform.position, targetLine1, out hitObsticle, Vector3.Distance(target.position, transform.position), detectMasks) && GetComponentInChildren<DetectVision>().Detected())
         {
             Bounds bounds = hitObsticle.collider.bounds;
 
@@ -65,27 +67,37 @@ public class ShortestPath : MonoBehaviour
                 }
             }
 
-            Debug.DrawLine(observerPosition, leftPoint, Color.red, 1f);
+            Debug.DrawLine(observerPosition, leftPoint, Color.green, 1f);
             Debug.DrawLine(observerPosition, rightPoint, Color.blue, 1f);
 
-            if(Vector3.Distance(leftPoint,transform.position) > Vector3.Distance(rightPoint, transform.position))
+            Vector3 obstacleCenter = hitObsticle.collider.bounds.center;
+
+            Vector3 directionFromCenterToLeft = (leftPoint - obstacleCenter).normalized;
+            Vector3 directionFromCenterToRight = (rightPoint - obstacleCenter).normalized;
+
+            Vector3 leftOffset = leftPoint + directionFromCenterToLeft * offset;
+            Vector3 rightOffset = rightPoint + directionFromCenterToRight * offset;
+
+
+            Debug.DrawLine(observerPosition, leftOffset, Color.yellow, 1f);
+            Debug.DrawLine(observerPosition, rightOffset, Color.cyan, 1f);
+
+            if (Vector3.Distance(new Vector3(leftOffset.x, transform.position.y, leftOffset.z), transform.position) +
+                Vector3.Distance(new Vector3(leftOffset.x, transform.position.y, leftOffset.z), target.position) >
+                Vector3.Distance(new Vector3(rightOffset.x, transform.position.y, rightOffset.z), transform.position) +
+                Vector3.Distance(new Vector3(rightOffset.x, transform.position.y, rightOffset.z), target.position))
             {
-                SetPath(rightPoint);
+                GivePath(new Vector3(rightOffset.x, transform.position.y, rightOffset.z));
             }
             else
             {
-                SetPath(leftPoint);
+                GivePath(new Vector3(leftOffset.x, transform.position.y, leftOffset.z));
             }
         }
-        else
+        else if (thisHead.GetComponent<DetectVision>().Detected())
         {
-            SetPath(target.position);
+            GivePath(target.position);
         }
-    }
-
-    private void SetPath(Vector3 targetPos)
-    {
-        GivePath(new Vector3(targetPos.x, transform.position.y, targetPos.x));
     }
 
     public void GivePath(Vector3 givenPath)

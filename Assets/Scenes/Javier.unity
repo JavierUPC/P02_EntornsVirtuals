@@ -135,7 +135,9 @@ GameObject:
   - component: {fileID: 453521651}
   - component: {fileID: 453521650}
   - component: {fileID: 453521649}
+  - component: {fileID: 453521654}
   - component: {fileID: 453521648}
+  - component: {fileID: 453521655}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -155,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5261f7ed1f1084f8cc004bcb1a8077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1218352368}
   thisHead: {fileID: 2039787530}
 --- !u!54 &453521649
 Rigidbody:
@@ -271,6 +272,38 @@ Transform:
   - {fileID: 2039787530}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 100.34, z: 0}
+--- !u!114 &453521654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453521647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7648c825007ee04eb131baf1549b1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1218352368}
+  thisHead: {fileID: 2039787529}
+  offset: 1
+  detectMasks:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &453521655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453521647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115cc3763ebae1b4eabfea8568dff8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardMove: 6
+  turnFreq: 5
 --- !u!1 &854987604
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 1218352363}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9197516, y: 3.96, z: 1.57}
+  m_LocalPosition: {x: 0.62, y: 3.96, z: -2.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -924,10 +957,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisHead: {fileID: 2039787530}
   amountCircels: 20
-  maxAngle: 30
-  raysPerCircle: 30
-  distancia: 40
-  necessaryHideTime: 3
+  maxAngle: 15
+  raysPerCircle: 25
+  distancia: 30
+  necessaryHideTime: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

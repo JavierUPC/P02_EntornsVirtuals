@@ -12,8 +12,8 @@ public class DetectVision : MonoBehaviour
     public float necessaryHideTime;
     private LayerMask layerMask;
     private Vector3 direccion;
-    private bool detected;
-    private bool inView;
+    private bool detected = false;
+    private bool inView = false;
     private float unseenTime;
 
     private void Start()
@@ -33,6 +33,7 @@ public class DetectVision : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Debug.Log($"Detected: {detected}, InView: {inView}, UnseenTime: {unseenTime}");
         LightCone();
         if(!inView)
         {
@@ -58,9 +59,10 @@ public class DetectVision : MonoBehaviour
                 direccion = thisHead.TransformDirection(direccion);
 
                 Debug.DrawRay(transform.position, direccion * distancia, Color.red);
+
                 if(Physics.Raycast(transform.position, direccion, out RaycastHit hit, distancia, layerMask))
                 {
-                    if (hit.collider.tag != "Player")
+                    if (!hit.collider.CompareTag("Player"))
                     {
                         inView = false;
                     }
@@ -69,9 +71,12 @@ public class DetectVision : MonoBehaviour
                         unseenTime = 0;
                         detected = true;
                         inView = true;
-                        Debug.Log(detected);
                         return;
                     }
+                }
+                else
+                {
+                    inView = false;
                 }
 
                 if (unseenTime >= necessaryHideTime)
@@ -85,5 +90,10 @@ public class DetectVision : MonoBehaviour
     public bool Detected()
     {
         return detected;
+    }
+
+    public bool InView()
+    {
+        return inView;
     }
 }

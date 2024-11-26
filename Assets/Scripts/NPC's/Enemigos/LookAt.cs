@@ -5,7 +5,6 @@ using UnityEngine;
 public class LookAt : MonoBehaviour
 {
     private Vector3 lookAt;
-    public Transform target;
     public Transform thisHead; 
 
     // Update is called once per frame
@@ -14,20 +13,21 @@ public class LookAt : MonoBehaviour
         if (!thisHead.gameObject.GetComponent<DetectVision>().Detected() /*&& !thisHead.gameObject.GetComponent<DetectAudio>().Detected()*/)
             return;
 
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        transform.LookAt(new Vector3(lookAt.x, transform.position.y, lookAt.z));
 
         if (thisHead != null)
         {
-            Vector3 direccion = target.position - thisHead.position;
+            Vector3 direccion = lookAt - thisHead.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(direccion, Vector3.up);
 
-            if (targetRotation.x < -70f)
-                targetRotation = Quaternion.Euler(-70f, targetRotation.y, targetRotation.z);
-            else if (targetRotation.x > 15f)
-                targetRotation = Quaternion.Euler(0f, targetRotation.y, targetRotation.z);
+            Vector3 eulerRotation = targetRotation.eulerAngles;
 
+            if (eulerRotation.x > 180) 
+                eulerRotation.x -= 360;
 
+            eulerRotation.x = Mathf.Clamp(eulerRotation.x, -50f, 15f);
+            targetRotation = Quaternion.Euler(eulerRotation);
             thisHead.rotation = targetRotation;
         }
     }
