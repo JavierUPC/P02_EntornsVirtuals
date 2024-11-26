@@ -78,31 +78,36 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
 
 
-       
-            Debug.Log("Tecla de salto presionada: " + Input.GetKeyDown(KeyCode.Space));  // Esto debería mostrar si la tecla de espacio es detectada
+        // Verificar si está tocando el suelo
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
 
-            // Verificar si está tocando el suelo
-            isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
-
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            {
-                Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
-                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                animator.SetBool("IsJumping",true);
-            }
-
-
-
-
-
-        if(!_wasGrounded && isGrounded)
+        // SALTO
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            animator.SetBool("IsJumping", false);
+            Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reiniciar la velocidad vertical
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);      // Aplicar fuerza de salto
+            animator.SetBool("IsJumping", true);                        // Activar animación de salto
         }
 
+        // ACTIVAR CAÍDA
+        if (!isGrounded && rb.velocity.y < 0) // Si no está en el suelo y está cayendo
+        {
+            animator.SetBool("IsFalling", true); // Activar la animación de caída
+        }
 
+        // DETECTAR ATERRIZAJE
+        if (!_wasGrounded && isGrounded) // Si estaba en el aire y ahora está en el suelo
+        {
+            animator.SetBool("IsJumping", false); // Finalizar animación de salto
+            animator.SetBool("IsFalling", false); // Finalizar animación de caída
+            animator.SetTrigger("IsLanding");    // Activar animación de aterrizaje
+        }
 
+        // Actualizar estado previo del suelo
         _wasGrounded = isGrounded;
+
+
+
     }
 }
