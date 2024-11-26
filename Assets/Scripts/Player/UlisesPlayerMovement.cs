@@ -17,6 +17,7 @@ public class UlisesPlayerMovement : MonoBehaviour
     private bool isGrounded;             // Si está en el suelo
     private float yRotation = 0f;        // Rotación de la cámara en el eje Y (para rotar el jugador)
 
+    bool _wasGrounded;
     void Update()
     {
         // Verificar si está tocando el suelo
@@ -48,6 +49,7 @@ public class UlisesPlayerMovement : MonoBehaviour
         bool isCrouchWalking = isWalking && isCrouching;
 
 
+
         // Ajustar velocidad según el estado
         if (isRunning)
         {
@@ -76,8 +78,7 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
 
 
-        void Update()
-        {
+       
             Debug.Log("Tecla de salto presionada: " + Input.GetKeyDown(KeyCode.Space));  // Esto debería mostrar si la tecla de espacio es detectada
 
             // Verificar si está tocando el suelo
@@ -88,10 +89,20 @@ public class UlisesPlayerMovement : MonoBehaviour
                 Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
                 rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                animator.SetTrigger("IsJumping");
+                animator.SetBool("IsJumping",true);
             }
+
+
+
+
+
+        if(!_wasGrounded && isGrounded)
+        {
+            animator.SetBool("IsJumping", false);
         }
 
 
+
+        _wasGrounded = isGrounded;
     }
 }
