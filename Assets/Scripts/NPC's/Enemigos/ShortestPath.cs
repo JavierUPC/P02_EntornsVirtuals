@@ -136,4 +136,9 @@ public class ShortestPath : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(push * collisionPushForce, ForceMode.Impulse);
         }
     }
+
+    public Transform GiveTarget()
+    {
+        return target;
+    }
 }
