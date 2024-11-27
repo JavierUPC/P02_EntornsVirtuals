@@ -7,6 +7,7 @@ public class ShortestPath : MonoBehaviour
     public Transform target;
     public GameObject thisHead;
     public float offset;
+    public float collisionPushForce;
 
     [SerializeField]
     public LayerMask detectMasks;
@@ -94,14 +95,45 @@ public class ShortestPath : MonoBehaviour
                 GivePath(new Vector3(leftOffset.x, transform.position.y, leftOffset.z));
             }
         }
-        else if (thisHead.GetComponent<DetectVision>().Detected())
+        else if (GetComponentInChildren<DetectVision>().Detected())
         {
             GivePath(target.position);
+        }
+        else if (!GetComponentInChildren<DetectVision>().Detected())
+        {
+            GivePath(transform.TransformDirection(new Vector3(0,transform.position.y,transform.position.z+1)));
         }
     }
 
     public void GivePath(Vector3 givenPath)
     {
         GetComponent<LookAt>().MoveCoords(givenPath);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Wall"))
+        {
+            ContactPoint contact = collision.contacts[0];
+            Vector3 collisionPoint = contact.point;
+
+            Debug.Log("Collided");
+
+            // Transform collision point into the object's local space
+            Vector3 localCollisionPoint = transform.InverseTransformPoint(collisionPoint);
+
+            Vector3 push = Vector3.zero;
+
+            if (localCollisionPoint.x < 0)
+            {
+                push = transform.right;
+            }
+            else
+            {
+                push = -transform.right;
+            }
+
+            GetComponent<Rigidbody>().AddForce(push * collisionPushForce, ForceMode.Impulse);
+        }
     }
 }

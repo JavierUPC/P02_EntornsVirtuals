@@ -286,7 +286,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1218352368}
   thisHead: {fileID: 2039787529}
-  offset: 1
+  offset: 2
+  collisionPushForce: 5
   detectMasks:
     serializedVersion: 2
     m_Bits: 128
@@ -318,7 +319,7 @@ GameObject:
   - component: {fileID: 854987605}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -404,7 +405,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.57, y: 5.05, z: 0.06}
-  m_LocalScale: {x: 0.22, y: 6.06, z: 21.86}
+  m_LocalScale: {x: 14.53, y: 6.02, z: 21.86}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -632,7 +633,7 @@ Transform:
   m_GameObject: {fileID: 1218352363}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: 3.96, z: -2.77}
+  m_LocalPosition: {x: 6.7, y: 3.96, z: 6.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

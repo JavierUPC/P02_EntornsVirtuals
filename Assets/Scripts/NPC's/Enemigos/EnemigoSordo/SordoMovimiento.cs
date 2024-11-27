@@ -58,7 +58,5 @@ public class SordoMovimiento : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 1, transform.rotation.eulerAngles.z);
         }
-
-        Debug.Log(mode);
     }
 }
