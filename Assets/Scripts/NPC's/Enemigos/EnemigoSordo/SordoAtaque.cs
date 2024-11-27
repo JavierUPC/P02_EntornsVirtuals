@@ -23,7 +23,7 @@ public class SordoAtaque : MonoBehaviour
         {
             timer = 0;
             //animación de ataque
-            GetComponent<Rigidbody>().AddForce(dashForce * transform.forward, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(dashForce * transform.forward, ForceMode.Impulse); //Dash hacia delante para atacar
         }
     }
 
