@@ -24,6 +24,7 @@ public class SordoAtaque : MonoBehaviour
         {
             timer = 0;
             animator.SetTrigger("Attack");
+            animationState = true;
             GetComponent<Rigidbody>().AddForce(dashForce * transform.forward, ForceMode.Impulse); //Dash hacia delante para atacar
         }
     }
@@ -32,20 +33,17 @@ public class SordoAtaque : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player") && animationState)
         {
-            Damage();
+            Damage(collision.gameObject);
         }
     }
 
-    public void Damage()
+    public void Damage(GameObject Player)
     {
-        //Hacer daño
+        Destroy(Player);
     }
 
     public void Animation() //Llamar este método en primer y último frame de la animación
     {
-        if (animationState)
-            animationState = false;
-        else
-            animationState = true;
+        animationState = false;
     }
 }

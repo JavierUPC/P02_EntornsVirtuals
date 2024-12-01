@@ -27,8 +27,6 @@ public class SordoMovimiento : MonoBehaviour
             NotEngaged();
 
         timer += Time.unscaledDeltaTime;
-
-        Debug.Log(rb.velocity.y);
     }
 
     private void Engaged()
@@ -37,6 +35,7 @@ public class SordoMovimiento : MonoBehaviour
         animator.SetBool("Running", true);
         Vector3 localSpeed = new Vector3(0, rb.velocity.y, forwardMove);
         rb.velocity = transform.TransformDirection(localSpeed);
+        //Debug.Log(rb.velocity.y);
     }
 
     private void NotEngaged()
@@ -51,7 +50,7 @@ public class SordoMovimiento : MonoBehaviour
                 timer = 0;
             }
 
-            Vector3 localSpeed = new Vector3(0, rb.velocity.y, forwardMove / 4);
+            Vector3 localSpeed = new Vector3(0, rb.velocity.y, forwardMove / 2);
             rb.velocity = transform.TransformDirection(localSpeed);
 
         }
@@ -66,5 +65,6 @@ public class SordoMovimiento : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 1, transform.rotation.eulerAngles.z);
         }
+        //Debug.Log(rb.velocity.y);
     }
 }
