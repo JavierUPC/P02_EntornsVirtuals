@@ -9,10 +9,11 @@ public class SordoAtaque : MonoBehaviour
     public float dashForce = 0;
     private float timer = 0;
     private bool animationState = false;
+    private Animator animator;
 
     private void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -22,7 +23,7 @@ public class SordoAtaque : MonoBehaviour
         if (timer > attackDelay && GetComponentInChildren<DetectVision>().InView() && Vector3.Distance(transform.position, GetComponent<ShortestPath>().GiveTarget().position) < attackDistance)
         {
             timer = 0;
-            //animación de ataque
+            animator.SetTrigger("Attack");
             GetComponent<Rigidbody>().AddForce(dashForce * transform.forward, ForceMode.Impulse); //Dash hacia delante para atacar
         }
     }

@@ -88,11 +88,11 @@ public class ShortestPath : MonoBehaviour
                 Vector3.Distance(new Vector3(rightOffset.x, transform.position.y, rightOffset.z), transform.position) +
                 Vector3.Distance(new Vector3(rightOffset.x, transform.position.y, rightOffset.z), target.position))
             {
-                GivePath(new Vector3(rightOffset.x, transform.position.y, rightOffset.z));
+                GivePath(new Vector3(rightOffset.x, transform.position.y-0.1f, rightOffset.z));
             }
             else
             {
-                GivePath(new Vector3(leftOffset.x, transform.position.y, leftOffset.z));
+                GivePath(new Vector3(leftOffset.x, transform.position.y-0.1f, leftOffset.z));
             }
         }
         else if (GetComponentInChildren<DetectVision>().Detected())
@@ -107,6 +107,7 @@ public class ShortestPath : MonoBehaviour
 
     public void GivePath(Vector3 givenPath)
     {
+        //Debug.Log(givenPath);
         GetComponent<LookAt>().MoveCoords(givenPath);
     }
 

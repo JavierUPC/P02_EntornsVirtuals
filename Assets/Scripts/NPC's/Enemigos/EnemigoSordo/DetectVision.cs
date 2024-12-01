@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DetectVision : MonoBehaviour
 {
-    public Transform thisHead;
+    private Transform thisHead;
     public int amountCircels = 1;
     public int maxAngle;
     public int raysPerCircle = 1;
@@ -18,6 +18,7 @@ public class DetectVision : MonoBehaviour
 
     private void Start()
     {
+        thisHead = GetComponent<Transform>();
         detected = false;
 
         if (maxAngle > 65)

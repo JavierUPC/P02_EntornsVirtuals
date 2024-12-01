@@ -9,11 +9,13 @@ public class SordoMovimiento : MonoBehaviour
     private bool mode = false;
     private float timer = 0;
 
+    private Animator animator;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,19 +27,24 @@ public class SordoMovimiento : MonoBehaviour
             NotEngaged();
 
         timer += Time.unscaledDeltaTime;
+
+        Debug.Log(rb.velocity.y);
     }
 
     private void Engaged()
     {
+        animator.SetBool("Walking", false);
+        animator.SetBool("Running", true);
         Vector3 localSpeed = new Vector3(0, rb.velocity.y, forwardMove);
         rb.velocity = transform.TransformDirection(localSpeed);
     }
 
     private void NotEngaged()
     {
-
+        animator.SetBool("Running", false);
         if (!mode)
         {
+            animator.SetBool("Walking", true);
             if (timer > turnFreq)
             {
                 mode = true;
@@ -50,6 +57,7 @@ public class SordoMovimiento : MonoBehaviour
         }
         else
         {
+            animator.SetBool("Walking", false);
             if (timer > turnFreq)
             {
                 mode = false;
