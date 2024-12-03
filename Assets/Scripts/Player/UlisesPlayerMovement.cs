@@ -14,7 +14,7 @@ public class UlisesPlayerMovement : MonoBehaviour
     public LayerMask groundMask;         // Máscara de la capa del suelo
 
     private Vector3 movement;            // Dirección de movimiento
-    private bool isGrounded;             // Si está en el suelo
+    public bool isGrounded;             // Si está en el suelo
     private float yRotation = 0f;        // Rotación de la cámara en el eje Y (para rotar el jugador)
 
     bool _wasGrounded;
@@ -103,7 +103,8 @@ public class UlisesPlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsJumping", false); // Finalizar animación de salto
             animator.SetBool("IsFalling", false); // Finalizar animación de caída
-            animator.SetTrigger("IsLanding");    // Activar animación de aterrizaje
+            animator.SetTrigger("Landed");    // Activar animación de aterrizaje
+            Debug.Log("Landed");
         }
 
         // Actualizar estado previo del suelo
