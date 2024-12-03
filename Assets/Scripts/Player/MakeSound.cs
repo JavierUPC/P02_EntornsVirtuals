@@ -48,7 +48,7 @@ public class MakeSound : MonoBehaviour
                 {
                     noContact = true;
                 }
-                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsRunning") && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
+                else if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
