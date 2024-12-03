@@ -7,6 +7,8 @@ TagManager:
   - Terrain
   - Wall
   - Enemy
+  - Floored
+  - Floor
   - Ground
   layers:
   - Default
@@ -14,11 +16,14 @@ TagManager:
   - Ignore Raycast
   - Terrain
   - Water
-  - UI
   - Player
   - Wall
   - Enemy
   - Ground
+  - Floor
+  - UI
+  - HitBox
+  - 
   - 
   - 
   - 
