@@ -8,8 +8,6 @@ public class ShortestPath : MonoBehaviour
     public GameObject thisHead;
     public float offset;
     public float collisionPushForce;
-    public float sphereDiameter = 1f; // Diameter of the sphere used for detecting obstacles
-    public float rotationSpeed = 5f;  // Speed of rotation when avoiding obstacles
 
     [SerializeField]
     public LayerMask detectMasks;
@@ -42,7 +40,7 @@ public class ShortestPath : MonoBehaviour
             float smallestAngle = float.MaxValue;
 
             int rayCount = 360; // Number of rays to cast (1 ray per degree)
-            float rayDistance = 3f; // Distance of each ray
+            float rayDistance = 10f; // Distance of each ray
             float rayHeight = transform.position.y; // Fixed height
 
             for (int i = 0; i < rayCount; i++)
@@ -91,7 +89,7 @@ public class ShortestPath : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.CompareTag("Wall"))
+        if (collision.collider.CompareTag("Wall") && GetComponentInChildren<DetectVision>().Detected())
         {
             ContactPoint contact = collision.contacts[0];
             Vector3 collisionPoint = contact.point;
