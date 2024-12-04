@@ -3,17 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Terrain
+  - Wall
+  - Enemy
+  - Floored
+  - Floor
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
+  - Player
+  - Wall
+  - Enemy
+  - Ground
+  - Floor
   - UI
-  - 
-  - 
-  - 
+  - HitBox
   - 
   - 
   - 
