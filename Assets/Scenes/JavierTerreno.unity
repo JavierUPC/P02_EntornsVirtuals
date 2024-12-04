@@ -527,9 +527,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2972097350628283654, guid: 34e63f7907bfe944385ae9796c412e00, type: 3}
+      propertyPath: forwardMove
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3210353525123734747, guid: 34e63f7907bfe944385ae9796c412e00, type: 3}
       propertyPath: m_Name
       value: EnemigoSordo 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811374714314353714, guid: 34e63f7907bfe944385ae9796c412e00, type: 3}
+      propertyPath: dashForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811374714314353714, guid: 34e63f7907bfe944385ae9796c412e00, type: 3}
+      propertyPath: attackDistance
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
