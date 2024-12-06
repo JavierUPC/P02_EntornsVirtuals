@@ -541,6 +541,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: IsDeBugging
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -739,13 +745,13 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5692994725245731269}
-    m_Position: {x: 440, y: -590, z: 0}
+    m_Position: {x: 690, y: -450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5868272381573020781}
     m_Position: {x: 580, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8429254551191854722}
-    m_Position: {x: -220, y: 90, z: 0}
+    m_Position: {x: -210, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5791845791397893092}
     m_Position: {x: 240, y: -430, z: 0}
@@ -760,7 +766,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 460, y: -690, z: 0}
+  m_AnyStatePosition: {x: 990, y: -380, z: 0}
   m_EntryPosition: {x: 20, y: 610, z: 0}
   m_ExitPosition: {x: 1630, y: 670, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

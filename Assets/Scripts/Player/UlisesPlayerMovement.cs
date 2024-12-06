@@ -80,6 +80,8 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsDancing", isDancing);
 
 
+
+
         // Verificar si está tocando el suelo
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
 
