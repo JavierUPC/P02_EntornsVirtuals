@@ -12,25 +12,25 @@ public class SordoAudioManager : MonoBehaviour
         PlayIdle();
     }
 
-    public void PlayStep1()
+    public void PlayStep1() //Desde el animador
     {
         audioSource2.clip = step1;
         audioSource2.Play();
-        Debug.Log("Played Step 1");
+        //Debug.Log("Played Step 1");
     }
 
-    public void PlayStep2()
+    public void PlayStep2() //Desde el animador
     {
         audioSource2.clip = step2;
         audioSource2.Play();
-        Debug.Log("Played Step 2");
+        //Debug.Log("Played Step 2");
     }
 
-    public void PlayRoar()
+    public void PlayRoar() 
     {
         audioSource1.clip = roar;
         audioSource1.Play();
-        Debug.Log("Played Roar");
+        //Debug.Log("Played Roar");
     }
 
     private void PlayIdle()
@@ -39,7 +39,7 @@ public class SordoAudioManager : MonoBehaviour
         {
             audioSource1.clip = idle;
             audioSource1.Play();
-            Debug.Log("Played Idle");
+            //Debug.Log("Played Idle");
         }
     }
 }

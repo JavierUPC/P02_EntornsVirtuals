@@ -28,62 +28,60 @@ public class ShortestPath : MonoBehaviour
     {
         if (GetComponentInChildren<DetectVision>().InView())
         {
-            // If the target is in view, move directly towards the target
             GivePath(target.position);
         }
         else if (GetComponentInChildren<DetectVision>().Detected() &&
                  Physics.Raycast(transform.position, (target.position - transform.position).normalized, out RaycastHit hitObstacle, Vector3.Distance(transform.position, target.position), detectMasks))
         {
-            // 360 Rays to detect the clearest path
+            //Debug.Log(target.position);
             Vector3 directionToTarget = (target.position - transform.position).normalized;
             Vector3 bestDirection = Vector3.zero;
             float smallestAngle = float.MaxValue;
 
-            int rayCount = 360; // Number of rays to cast (1 ray per degree)
-            float rayDistance = 10f; // Distance of each ray
-            float rayHeight = transform.position.y; // Fixed height
+            int rayCount = 360; 
+            float rayDistance = 50f; 
+            float rayHeight = transform.position.y+1; 
 
             for (int i = 0; i < rayCount; i++)
             {
-                // Calculate the direction of the ray in world space
-                float angle = i * Mathf.Deg2Rad; // Convert degree to radians
-                Vector3 rayDirection = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)); // Direction of the ray
-                Vector3 rayOrigin = new Vector3(transform.position.x, rayHeight, transform.position.z); // Start at current height
+                
+                float angle = i * Mathf.Deg2Rad; 
+                Vector3 rayDirection = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)); 
+                Vector3 rayOrigin = new Vector3(transform.position.x, rayHeight, transform.position.z); 
 
-                // Perform the raycast
                 if (!Physics.Raycast(rayOrigin, rayDirection, rayDistance, detectMasks))
                 {
-                    // If the ray does not hit an obstacle, calculate the angle to the target
                     float angleToTarget = Vector3.Angle(directionToTarget, rayDirection);
 
-                    // Check if this angle is the smallest so far
                     if (angleToTarget < smallestAngle)
                     {
                         smallestAngle = angleToTarget;
                         bestDirection = rayDirection;
                     }
                 }
-
-                // Visualize the rays for debugging
-                Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.yellow);
+                //Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.yellow);
             }
 
             if (bestDirection != Vector3.zero)
             {
-                // If a valid direction is found, move toward it
-                Vector3 newTargetPosition = transform.position + bestDirection * rayDistance;
+                Vector3 newTargetPosition = transform.position + bestDirection;
                 GivePath(newTargetPosition);
             }
         }
-        else if (!GetComponentInChildren<DetectVision>().Detected())
+        else if (GetComponentInChildren<DetectVision>().Detected() &&
+            !Physics.Raycast(transform.position, (target.position - transform.position).normalized, out RaycastHit nohitObstacle, Vector3.Distance(transform.position, target.position), detectMasks))
         {
-            // If the target is not detected, stop or continue searching
-            GivePath(new Vector3(transform.position.x, transform.position.y, target.position.z + 1));
+            //Debug.Log("No tiene obstaculo");
+            //Debug.Log(GetComponentInChildren<DetectVision>().Detected());
+            GivePath(target.position);
         }
+        else if (!GetComponentInChildren<DetectVision>().Detected())
+            GivePath(new Vector3(transform.position.x, transform.position.y, transform.position.z + 1));
     }
 
     public void GivePath(Vector3 givenPath)
     {
+        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), givenPath, Color.green);
         GetComponent<LookAt>().MoveCoords(givenPath);
     }
 
@@ -94,11 +92,11 @@ public class ShortestPath : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             Vector3 collisionPoint = contact.point;
 
-            Vector3 localCollisionPoint = transform.InverseTransformPoint(collisionPoint);
+            Vector3 enemyCollisionPoint = transform.InverseTransformPoint(collisionPoint);
 
             Vector3 push = Vector3.zero;
 
-            if (localCollisionPoint.x < 0)
+            if (enemyCollisionPoint.x < 0)
             {
                 push = transform.right;
             }
@@ -108,7 +106,7 @@ public class ShortestPath : MonoBehaviour
             }
 
             GetComponent<Rigidbody>().AddForce(push * collisionPushForce, ForceMode.Impulse);
-            Debug.Log("Pushed");
+            //Debug.Log("Pushed");
         }
     }
 
