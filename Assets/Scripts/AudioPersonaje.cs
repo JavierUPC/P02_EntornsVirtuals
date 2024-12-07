@@ -9,14 +9,14 @@ public class AudioPersonaje : MonoBehaviour
 
     public void PlayPaso1() // Desde el animador
     {
-        audioSource1.clip = step1; // Usamos audioSource1 correctamente
+        audioSource1.clip = step1; 
         audioSource1.Play();
         // Debug.Log("Played Step 1");
     }
 
     public void PlayPaso2() // Desde el animador
     {
-        audioSource1.clip = step2; // Usamos audioSource1 correctamente
+        audioSource1.clip = step2; 
         audioSource1.Play();
         // Debug.Log("Played Step 2");
     }
