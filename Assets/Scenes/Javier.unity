@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 141391940}
   - component: {fileID: 141391939}
   - component: {fileID: 141391938}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 854987607}
   - component: {fileID: 854987606}
   - component: {fileID: 854987605}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 1218352366}
   - component: {fileID: 1218352365}
   - component: {fileID: 1218352364}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

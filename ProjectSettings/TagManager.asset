@@ -16,17 +16,14 @@ TagManager:
   - Ignore Raycast
   - Terrain
   - Water
-  - Player
+  - UI
   - Wall
   - Enemy
   - Ground
   - Floor
   - UI
   - HitBox
-  - 
-  - 
-  - 
-  - 
+  - Player
   - 
   - 
   - 
