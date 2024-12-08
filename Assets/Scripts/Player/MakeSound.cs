@@ -5,7 +5,7 @@ using UnityEngine;
 public class MakeSound : MonoBehaviour
 {
     public float distanciaWalk, distanciaRun, distanciaCrouch;
-    public LayerMask layerMask;
+    private LayerMask layerMask;
     public int amountCircles;
     public int raysPerCircle;
     private Animator moveState;
@@ -48,23 +48,20 @@ public class MakeSound : MonoBehaviour
                 {
                     noContact = true;
                 }
-                else if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
+                else if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaRun)
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
-                    return;
                 }
-                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaWalk)
+                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaWalk)
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
-                    return;
                 }
-                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsCrouchWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaCrouch)
+                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsCrouchWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaCrouch)
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
-                    return;
                 }
             }
         }

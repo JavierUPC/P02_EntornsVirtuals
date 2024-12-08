@@ -30,7 +30,7 @@ public class ShaderColorChange : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log($"lastValue: {lastValue}, timer: {timer}, lerpTime: {lerpTime}");
+        //Debug.Log($"lastValue: {lastValue}, timer: {timer}, lerpTime: {lerpTime}");
 
         if (!timer && lastValue == 1)
             ColorToBlue();
