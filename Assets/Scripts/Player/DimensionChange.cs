@@ -9,6 +9,8 @@ public class DimensionChange : MonoBehaviour
     public Animator playerAnimator, canvasAnimator;
     public Transform camera;
     private bool IsChangingWorld;
+    public float cooldown;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +20,17 @@ public class DimensionChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsChangingWorld = (Input.GetKey(KeyCode.E));
+        timer += Time.unscaledDeltaTime;
+        IsChangingWorld = (Input.GetKey(KeyCode.E) && timer > cooldown);
         if (IsChangingWorld)
             ChangeDimension();
     }
 
     public void ChangeDimension()
     {
-        playerAnimator.SetBool("IsChangingWorld", true);;
+        timer = 0;
+        Debug.Log("Activado");
+        playerAnimator.SetTrigger("ChangeDimension");;
     }
 
     //public void CameraRotation()

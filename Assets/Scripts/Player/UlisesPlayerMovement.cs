@@ -51,6 +51,7 @@ public class UlisesPlayerMovement : MonoBehaviour
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
         bool isCrouchWalking = isWalking && isCrouching;
         bool isDancing = Input.GetKey(KeyCode.B);
+       
 
 
 
@@ -107,7 +108,8 @@ public class UlisesPlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsJumping", false); // Finalizar animación de salto
             animator.SetBool("IsFalling", false); // Finalizar animación de caída
-            animator.SetTrigger("IsLanding");    // Activar animación de aterrizaje
+            animator.SetTrigger("Landed");    // Activar animación de aterrizaje
+            Debug.Log("Aterrizado");
         }
 
         // Actualizar estado previo del suelo
