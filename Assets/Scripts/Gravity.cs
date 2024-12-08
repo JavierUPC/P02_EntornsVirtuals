@@ -28,7 +28,7 @@ public class Gravity : MonoBehaviour
             speed = 2;
         }
 
-        rb.velocity = new Vector3(rb.velocity.x, -speed, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y -speed, rb.velocity.z);
     }
 
     private void OnCollisionStay(Collision collision)
