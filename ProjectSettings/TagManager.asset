@@ -10,6 +10,7 @@ TagManager:
   - Floored
   - Floor
   - Ground
+  - Ciego
   layers:
   - Default
   - TransparentFX
