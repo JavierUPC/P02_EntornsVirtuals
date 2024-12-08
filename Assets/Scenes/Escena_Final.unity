@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 8162517b6ec2309499f99e303b29f146, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3f698c5d47507d54db2dcb930054532e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37218,33 +37218,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1501864544}
-  - component: {fileID: 1501864543}
-  m_Layer: 0
+  - component: {fileID: 1501864545}
+  m_Layer: 3
   m_Name: LightChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1501864543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501864542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab6892d682d6f041aa80a1745507e7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimensionChangeScript: {fileID: 0}
-  dystopianSkybox: {fileID: 0}
-  normalSkybox: {fileID: 0}
-  dystopianIntensityMultiplier: 0.5
-  normalIntensityMultiplier: 1
-  dystopianFogDensity: 0.1
-  normalFogDensity: 0.02
 --- !u!4 &1501864544
 Transform:
   m_ObjectHideFlags: 0
@@ -37260,6 +37241,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1501864545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501864542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ecd70023b0b3e4a92515d489c8663a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimensionChange: {fileID: 660482087}
+  normalIntensityMultiplier: 1
+  normalFogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  normalFogDensity: 0.003
+  normalSkybox: {fileID: 2100000, guid: 8162517b6ec2309499f99e303b29f146, type: 2}
+  normalSunIntensity: 1
+  dystopianIntensityMultiplier: 0.5
+  dystopianFogColor: {r: 0.27044016, g: 0.16583592, b: 0.16583592, a: 1}
+  dystopianFogDensity: 0.01
+  dystopianSkybox: {fileID: 2100000, guid: f97d8ca6fe491b642ba4b4891dff581c, type: 2}
+  dystopianSunIntensity: 0.5
+  sunLight: {fileID: 1806355769}
 --- !u!4 &1502964549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4752119395144139637, guid: aba00a3a9f0d5bc4cbd0b1bc12a3c58a, type: 3}

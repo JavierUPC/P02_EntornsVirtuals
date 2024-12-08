@@ -1,36 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class DimensionLightingChanger : MonoBehaviour
 {
-    [Header("References")]
-    public DimensionChange dimensionChangeScript; // Referencia al script DimensionChange
+    // Referencia al script DimensionChange
+    public DimensionChange dimensionChange;
 
-    [Header("Lighting Settings")]
-    public Material dystopianSkybox;              // Material del Skybox para la dimensión distópica
-    public Material normalSkybox;                 // Material del Skybox para la dimensión normal
-    public float dystopianIntensityMultiplier = 0.5f; // Intensidad de luz en la dimensión distópica
-    public float normalIntensityMultiplier = 1.0f;    // Intensidad de luz en la dimensión normal
-    public float dystopianFogDensity = 0.1f;      // Densidad de niebla en la dimensión distópica
-    public float normalFogDensity = 0.02f;        // Densidad de niebla en la dimensión normal
+    // Parámetros para el estado "No Dystopian"
+    public float normalIntensityMultiplier = 1f;
+    public Color normalFogColor = new Color(0.5f, 0.5f, 0.5f); // Color hexadecimal 808080
+    public float normalFogDensity = 0.003f;
+    public Material normalSkybox; // Skybox para el estado normal
+    public float normalSunIntensity = 1f; // Intensidad de la luz del sol para el estado normal
 
-    void Update()
+    // Parámetros para el estado "Dystopian"
+    public float dystopianIntensityMultiplier = 0.5f; // Ejemplo de valor, puedes cambiarlo
+    public Color dystopianFogColor = new Color(0.2f, 0.2f, 0.2f); // Color más oscuro, ajustable
+    public float dystopianFogDensity = 0.01f; // Mayor densidad, ajustable
+    public Material dystopianSkybox; // Skybox para el estado Dystopian
+    public float dystopianSunIntensity = 0.3f; // Intensidad de la luz del sol para el estado Dystopian
+
+    // Referencia a la luz del sol
+    public Light sunLight;
+
+    private void Update()
     {
-        //// Comprueba si el script y el método existen
-        //if (dimensionChangeScript != null)
-        //{
-        //    bool isDystopian = dimensionChangeScript.distopian;
+        if (dimensionChange != null)
+        {
+            if (dimensionChange.Dystopian())
+            {
+                SetDystopianLighting();
+            }
+            else
+            {
+                SetNormalLighting();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("DimensionChange script is not assigned.");
+        }
+    }
 
-        //    // Cambia el Skybox
-        //    RenderSettings.skybox = isDystopian ? dystopianSkybox : normalSkybox;
+    private void SetNormalLighting()
+    {
+        RenderSettings.ambientIntensity = normalIntensityMultiplier;
+        RenderSettings.fogColor = normalFogColor;
+        RenderSettings.fogDensity = normalFogDensity;
+        RenderSettings.skybox = normalSkybox;
+        if (sunLight != null)
+        {
+            sunLight.intensity = normalSunIntensity;
+        }
+        DynamicGI.UpdateEnvironment(); // Actualiza la iluminación global
+    }
 
-        //    // Cambia la intensidad de la luz
-        //    RenderSettings.sun.intensity = isDystopian ? dystopianIntensityMultiplier : normalIntensityMultiplier;
-
-        //    // Cambia la densidad de la niebla
-        //    RenderSettings.fogDensity = isDystopian ? dystopianFogDensity : normalFogDensity;
-        //}
+    private void SetDystopianLighting()
+    {
+        RenderSettings.ambientIntensity = dystopianIntensityMultiplier;
+        RenderSettings.fogColor = dystopianFogColor;
+        RenderSettings.fogDensity = dystopianFogDensity;
+        RenderSettings.skybox = dystopianSkybox;
+        if (sunLight != null)
+        {
+            sunLight.intensity = dystopianSunIntensity;
+        }
+        DynamicGI.UpdateEnvironment(); // Actualiza la iluminación global
     }
 }
