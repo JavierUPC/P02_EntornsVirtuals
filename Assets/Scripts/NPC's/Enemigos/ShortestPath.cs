@@ -81,7 +81,7 @@ public class ShortestPath : MonoBehaviour
 
     public void GivePath(Vector3 givenPath)
     {
-        Debug.DrawRay(transform.position, givenPath * 10, Color.yellow);
+        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), givenPath, Color.green);
         GetComponent<LookAt>().MoveCoords(givenPath);
     }
 

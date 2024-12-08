@@ -22,6 +22,8 @@ public class UlisesPlayerMovement : MonoBehaviour
     {
         // Verificar si está tocando el suelo
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+        
+       
 
         // Detectar entrada del teclado
         float horizontal = Input.GetAxis("Horizontal");
