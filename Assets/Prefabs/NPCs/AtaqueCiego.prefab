@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToMove: {fileID: 8298068133620863297}
   target: {fileID: 0}
-  speed: 600
-  delay: 0.05
+  speed: 200
+  delay: 0
 --- !u!54 &5927588649827635334
 Rigidbody:
   m_ObjectHideFlags: 0
