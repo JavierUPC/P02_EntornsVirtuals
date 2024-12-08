@@ -44,11 +44,8 @@ public class MakeSound : MonoBehaviour
             Debug.DrawRay(transform.position, direction * distanciaRun, Color.red);
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distanciaRun, layerMask))
             {
-                if (hit.collider.tag != "Enemy")
-                {
-                    noContact = true;
-                }
-                else if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaRun)
+              
+                if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaRun)
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
@@ -62,6 +59,11 @@ public class MakeSound : MonoBehaviour
                 {
                     hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
                     noContact = false;
+                }
+                else
+                {
+                    hit.collider.GetComponent<DetectAudio>().OnRayHit(false);
+                    noContact = true;
                 }
             }
         }
