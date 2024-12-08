@@ -39,7 +39,7 @@ public class SordoAtaque : MonoBehaviour
 
     public void Damage(GameObject Player)
     {
-        Destroy(Player);
+        Player.GetComponent<Kill>().Respawn();
     }
 
     public void Animation() //Llamar este método en primer y último frame de la animación
