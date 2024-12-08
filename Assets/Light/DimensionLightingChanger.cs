@@ -18,19 +18,19 @@ public class DimensionLightingChanger : MonoBehaviour
 
     void Update()
     {
-        // Comprueba si el script y el método existen
-        if (dimensionChangeScript != null)
-        {
-            bool isDystopian = dimensionChangeScript.distopian;
+        //// Comprueba si el script y el método existen
+        //if (dimensionChangeScript != null)
+        //{
+        //    bool isDystopian = dimensionChangeScript.distopian;
 
-            // Cambia el Skybox
-            RenderSettings.skybox = isDystopian ? dystopianSkybox : normalSkybox;
+        //    // Cambia el Skybox
+        //    RenderSettings.skybox = isDystopian ? dystopianSkybox : normalSkybox;
 
-            // Cambia la intensidad de la luz
-            RenderSettings.sun.intensity = isDystopian ? dystopianIntensityMultiplier : normalIntensityMultiplier;
+        //    // Cambia la intensidad de la luz
+        //    RenderSettings.sun.intensity = isDystopian ? dystopianIntensityMultiplier : normalIntensityMultiplier;
 
-            // Cambia la densidad de la niebla
-            RenderSettings.fogDensity = isDystopian ? dystopianFogDensity : normalFogDensity;
-        }
+        //    // Cambia la densidad de la niebla
+        //    RenderSettings.fogDensity = isDystopian ? dystopianFogDensity : normalFogDensity;
+        //}
     }
 }
