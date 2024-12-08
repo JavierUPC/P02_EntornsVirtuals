@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 65872356957887903}
   - component: {fileID: 247428412255651130}
   m_Layer: 7
-  m_Name: EnemigoSordo 1 1 2
+  m_Name: EnemigoSordoFinal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
