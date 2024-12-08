@@ -10,7 +10,7 @@ public class AudioPersonaje : MonoBehaviour
     public void PlayPaso1() // Desde el animador
     {
         audioSource1.clip = step1;
-        audioSource1.volume = 30;
+        audioSource1.volume = 0.2f;
         audioSource1.Play();
         // Debug.Log("Played Step 1");
     }
@@ -18,7 +18,7 @@ public class AudioPersonaje : MonoBehaviour
     public void PlayPaso2() // Desde el animador
     {
         audioSource1.clip = step2;
-        audioSource1.volume = 30;
+        audioSource1.volume = 0.2f;
         audioSource1.Play();
         // Debug.Log("Played Step 2");
     }
@@ -26,7 +26,7 @@ public class AudioPersonaje : MonoBehaviour
     public void PlaySalto()
     {
         audioSource1.clip = salto;
-        audioSource1.volume = 40;
+        audioSource1.volume = 0.3f;
         audioSource1.Play();
 
     }
