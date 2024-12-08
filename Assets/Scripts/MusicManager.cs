@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    public AudioClip inversa, normal;
+    private AudioSource musicPlayer;
+    public GameObject player;
+    private void FixedUpdate()
+    {
+        if (player.GetComponent<DimensionChange>().Dystopian() && musicPlayer.clip == normal)
+        {
+            InverseMusic();
+        }
+        else if (player.GetComponent<DimensionChange>().Dystopian() && musicPlayer.clip == inversa)
+        {
+            NormalMusic();
+        }
+    }
+
     public void NormalMusic()
     {
-
+        musicPlayer.clip = normal;
+        musicPlayer.Play();
     }
 
     public void InverseMusic()
     {
-
-    }
-
-    public void ChaseMusic()
-    {
-
+        musicPlayer.clip = inversa;
+        musicPlayer.Play();
     }
 }
