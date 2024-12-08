@@ -12803,7 +12803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5640.7
+      value: 5694.8
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12811,11 +12811,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 332.26608
+      value: 288.7
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8717702
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12823,7 +12823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.48991507
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.z
@@ -12835,7 +12835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -58.67
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -24998,7 +24998,6 @@ Transform:
   - {fileID: 256898744}
   - {fileID: 248507245}
   - {fileID: 88593808}
-  - {fileID: 635958225}
   - {fileID: 1096692503}
   - {fileID: 729739524}
   - {fileID: 474503889}
@@ -47622,7 +47621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5620.3657
+      value: 5587.3
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.y
@@ -47630,19 +47629,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 331.57028
+      value: 387
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.101837546
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9948011
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalRotation.z
@@ -47654,7 +47653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -191.69
       objectReference: {fileID: 0}
     - target: {fileID: 5055508817447739649, guid: 4cb25dde5e35e3e42a019508ab014614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -52602,3 +52601,4 @@ SceneRoots:
   - {fileID: 77084639}
   - {fileID: 1021244685}
   - {fileID: 743208206}
+  - {fileID: 1071028421095502217}
