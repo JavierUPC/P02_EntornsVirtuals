@@ -51,7 +51,6 @@ public class UlisesPlayerMovement : MonoBehaviour
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
         bool isCrouchWalking = isWalking && isCrouching;
         bool isDancing = Input.GetKey(KeyCode.B);
-        bool IsChangingWorld = Input.GetKey(KeyCode.E);
 
 
 
@@ -83,7 +82,6 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
         animator.SetBool("IsDancing", isDancing);
         animator.SetBool("IsCrouchingBack", IsCrouchingBack);
-        animator.SetBool("IsChangingWorld", IsChangingWorld);
 
 
         // Verificar si está tocando el suelo
