@@ -5,7 +5,7 @@ using UnityEngine;
 public class MakeSound : MonoBehaviour
 {
     public float distanciaWalk, distanciaRun, distanciaCrouch;
-    public LayerMask layerMask;
+    private LayerMask layerMask;
     public int amountCircles;
     public int raysPerCircle;
     private Animator moveState;
@@ -44,27 +44,30 @@ public class MakeSound : MonoBehaviour
             Debug.DrawRay(transform.position, direction * distanciaRun, Color.red);
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distanciaRun, layerMask))
             {
-                if (hit.collider.tag != "Enemy")
+              
+                if (hit.collider.tag == "Ciego" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaRun)
                 {
+                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    noContact = false;
+                }
+                else if (hit.collider.tag == "Ciego" && moveState.GetBool("IsWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaWalk)
+                {
+                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    noContact = false;
+                }
+                else if (hit.collider.tag == "Ciego" && moveState.GetBool("IsCrouchWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaCrouch)
+                {
+                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    noContact = false;
+                }
+                else if (hit.collider.tag != "Ciego")
+                {
+                    
+                }
+                else
+                {
+                    hit.collider.GetComponent<DetectAudio>().OnRayHit(false);
                     noContact = true;
-                }
-                else if (hit.collider.tag == "Enemy" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaRun)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
-                }
-                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaWalk)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
-                }
-                else if (hit.collider.tag == "Enemy" && moveState.GetBool("IsCrouchWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) < distanciaCrouch)
-                {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
-                    noContact = false;
-                    return;
                 }
             }
         }

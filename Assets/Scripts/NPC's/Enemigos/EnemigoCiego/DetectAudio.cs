@@ -31,6 +31,7 @@ public class DetectAudio : MonoBehaviour
             detected = false;
             undetectedTime = 0;
         }
+        Debug.Log(detected);
     }
     public void OnRayHit(bool value)
     {
@@ -41,5 +42,4 @@ public class DetectAudio : MonoBehaviour
     {
         return detected;
     }
-
 }

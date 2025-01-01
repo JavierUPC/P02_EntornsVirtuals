@@ -15,6 +15,7 @@ public class DetectVision : MonoBehaviour
     private bool detected = false;
     private bool inView = false;
     private float unseenTime;
+    private bool roarBool = true;
 
     private void Start()
     {
@@ -39,6 +40,12 @@ public class DetectVision : MonoBehaviour
         if(!inView)
         {
             unseenTime += Time.unscaledDeltaTime;
+        }
+
+        if (detected && roarBool)
+        {
+            GetComponentInParent<SordoAudioManager>().PlayRoar();
+            roarBool = false;
         }
     }
 
@@ -83,6 +90,7 @@ public class DetectVision : MonoBehaviour
                 if (unseenTime >= necessaryHideTime)
                 {
                     detected = false;
+                    roarBool = true;
                 }
             }
         }

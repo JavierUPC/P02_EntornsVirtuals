@@ -22,6 +22,8 @@ public class UlisesPlayerMovement : MonoBehaviour
     {
         // Verificar si está tocando el suelo
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
+        
+       
 
         // Detectar entrada del teclado
         float horizontal = Input.GetAxis("Horizontal");
@@ -44,10 +46,12 @@ public class UlisesPlayerMovement : MonoBehaviour
         // Estados de animación
         bool isWalking = movement.magnitude > 0 && vertical >= 0;
         bool isWalkingBack = vertical < 0;
+        bool IsCrouchingBack = vertical < 0 && isWalkingBack;
         bool isCrouching = Input.GetKey(KeyCode.LeftControl);
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
         bool isCrouchWalking = isWalking && isCrouching;
         bool isDancing = Input.GetKey(KeyCode.B);
+       
 
 
 
@@ -78,6 +82,7 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
         animator.SetBool("IsDancing", isDancing);
+        animator.SetBool("IsCrouchingBack", IsCrouchingBack);
 
 
         // Verificar si está tocando el suelo
@@ -103,7 +108,8 @@ public class UlisesPlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsJumping", false); // Finalizar animación de salto
             animator.SetBool("IsFalling", false); // Finalizar animación de caída
-            animator.SetTrigger("IsLanding");    // Activar animación de aterrizaje
+            animator.SetTrigger("Landed");    // Activar animación de aterrizaje
+            Debug.Log("Aterrizado");
         }
 
         // Actualizar estado previo del suelo
