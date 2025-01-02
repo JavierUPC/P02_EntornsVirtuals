@@ -18,7 +18,7 @@ public class DetectionStatus : EnemyState
     {
         if(firstDetected && !detected)
         {
-            Debug.Log("In");
+            //Debug.Log("In");
             startTime = Time.time;
             detected = true;
         }

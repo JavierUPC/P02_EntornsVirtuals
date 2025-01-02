@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FaceTarget : EnemyState
 {
-    public Transform target;
+    public GameObject target;
     public override void Do()
     {
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        Debug.Log(target.transform.position);
+        transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
     }
 }

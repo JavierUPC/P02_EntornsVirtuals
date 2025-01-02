@@ -2322,6 +2322,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2868607753416855769, guid: 91d36b04b4fbc2e47ad77b1223bb2271, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868607753416855769, guid: 91d36b04b4fbc2e47ad77b1223bb2271, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868607753416855769, guid: 91d36b04b4fbc2e47ad77b1223bb2271, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868607753416855769, guid: 91d36b04b4fbc2e47ad77b1223bb2271, type: 3}
       propertyPath: m_LocalPosition.x
       value: 54.85
       objectReference: {fileID: 0}
@@ -53750,7 +53762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detected: 0
-  ataque: {fileID: 8298068133620863297, guid: 91d36b04b4fbc2e47ad77b1223bb2271, type: 3}
+  ataque: {fileID: 77084640}
   attackInterval: 3.5
 --- !u!114 &1935625744
 MonoBehaviour:
