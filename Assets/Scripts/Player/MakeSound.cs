@@ -47,17 +47,17 @@ public class MakeSound : MonoBehaviour
               
                 if (hit.collider.tag == "Ciego" && (moveState.GetBool("IsJumping") || moveState.GetBool("IsRunning")) && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaRun)
                 {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    hit.collider.GetComponent<DetectionStatus>().OnRayHit(true);
                     noContact = false;
                 }
                 else if (hit.collider.tag == "Ciego" && moveState.GetBool("IsWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaWalk)
                 {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    hit.collider.GetComponent<DetectionStatus>().OnRayHit(true);
                     noContact = false;
                 }
                 else if (hit.collider.tag == "Ciego" && moveState.GetBool("IsCrouchWalking") && Vector3.Distance(hit.collider.transform.position, transform.position) <= distanciaCrouch)
                 {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(true);
+                    hit.collider.GetComponent<DetectionStatus>().OnRayHit(true);
                     noContact = false;
                 }
                 else if (hit.collider.tag != "Ciego")
@@ -66,7 +66,7 @@ public class MakeSound : MonoBehaviour
                 }
                 else
                 {
-                    hit.collider.GetComponent<DetectAudio>().OnRayHit(false);
+                    hit.collider.GetComponent<DetectionStatus>().OnRayHit(false);
                     noContact = true;
                 }
             }

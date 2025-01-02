@@ -31,7 +31,7 @@ public class ObjectMover : MonoBehaviour
         if (rb != null && target != null)
         {
             //calcul vector dir normalizado
-            Vector3 direction = (target.position - objectToMove.transform.position).normalized;
+            Vector3 direction = (new Vector3(target.position.x, transform.position.y, target.position.z) - objectToMove.transform.position).normalized;
 
             rb.velocity = direction * speed;
         }
