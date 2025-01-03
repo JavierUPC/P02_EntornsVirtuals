@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 101ebf3bc02ca6a4ba7db8f6b604530f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - move: {fileID: 4443025005967856631, guid: 84497b6f3388a324192978c78d6daac0, type: 3}
+  - jump: {fileID: 2556465706015863140, guid: 84497b6f3388a324192978c78d6daac0, type: 3}
+  - rotate: {fileID: 9146864818292149241, guid: 84497b6f3388a324192978c78d6daac0, type: 3}
+  - inputActions: {fileID: -944628639613478452, guid: 84497b6f3388a324192978c78d6daac0, type: 3}
+  - playerCam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
