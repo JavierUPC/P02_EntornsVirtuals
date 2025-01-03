@@ -13699,11 +13699,6 @@ CapsuleCollider:
   m_Height: 0.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!4 &437508469 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2825281485911010377, guid: e290b050a04b10f408200af71687103c, type: 3}
-  m_PrefabInstance: {fileID: 757364124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &440094670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53748,7 +53743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detected: 0
-  target: {fileID: 437508469}
+  target: {fileID: 660482078}
 --- !u!114 &1935625743
 MonoBehaviour:
   m_ObjectHideFlags: 0
