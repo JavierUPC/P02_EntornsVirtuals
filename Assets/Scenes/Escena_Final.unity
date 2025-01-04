@@ -19963,6 +19963,19 @@ MonoBehaviour:
   distanciaCrouch: 8
   amountCircles: 30
   raysPerCircle: 40
+--- !u!114 &660482109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660482078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46ad24cad9aede4297eee91ed0b6489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 11400000, guid: 5bd68a58bac69d740af3d0e4536f93f9, type: 2}
 --- !u!1001 &664812997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23253,8 +23266,20 @@ PrefabInstance:
       value: -158.377
       objectReference: {fileID: 0}
     - target: {fileID: 8509552741500888318, guid: e290b050a04b10f408200af71687103c, type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509552741500888318, guid: e290b050a04b10f408200af71687103c, type: 3}
+      propertyPath: runSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509552741500888318, guid: e290b050a04b10f408200af71687103c, type: 3}
       propertyPath: jumpForce
-      value: 20
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509552741500888318, guid: e290b050a04b10f408200af71687103c, type: 3}
+      propertyPath: crouchSpeed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23272,6 +23297,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2051363680847976953, guid: e290b050a04b10f408200af71687103c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 660482102}
+    - targetCorrespondingSourceObject: {fileID: 2051363680847976953, guid: e290b050a04b10f408200af71687103c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660482109}
   m_SourcePrefab: {fileID: 100100000, guid: e290b050a04b10f408200af71687103c, type: 3}
 --- !u!1001 &760721785
 PrefabInstance:
