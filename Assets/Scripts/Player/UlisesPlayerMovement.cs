@@ -109,7 +109,7 @@ public class UlisesPlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", false); // Finalizar animación de salto
             animator.SetBool("IsFalling", false); // Finalizar animación de caída
             animator.SetTrigger("Landed");    // Activar animación de aterrizaje
-            Debug.Log("Aterrizado");
+            //Debug.Log("Aterrizado");
         }
 
         // Actualizar estado previo del suelo
