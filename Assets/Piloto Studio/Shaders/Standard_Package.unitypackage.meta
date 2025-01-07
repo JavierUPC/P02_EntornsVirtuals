@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Piloto Studio/Shaders/Standard_Package.unitypackage.meta
 guid: 98d25261f01210648933d41926dc574e
+========
+guid: 5cbf1c79a16ec1a45a685d03657e7bc4
+>>>>>>>> Stashed changes:Assets/Piloto Studio/Shaders/URP_2022.3DepthIssue.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
