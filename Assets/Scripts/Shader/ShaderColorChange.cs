@@ -53,7 +53,7 @@ public class ShaderColorChange : MonoBehaviour
 
     private void ColorToBlue()
     {
-        Debug.Log("Entered Blue");
+        //Debug.Log("Entered Blue");
         lerpTime += Time.unscaledDeltaTime / transitionTime;
         material.SetColor("_ColorBase", Color.Lerp(red, blue, lerpTime));
         material.SetColor("_Emission", Color.Lerp(emissionRed, emissionBlue, lerpTime));
@@ -68,7 +68,7 @@ public class ShaderColorChange : MonoBehaviour
 
     private void ColorToRed()
     {
-        Debug.Log("Entered Blue");
+        //Debug.Log("Entered Blue");
         lerpTime += Time.unscaledDeltaTime / transitionTime;
         material.SetColor("_ColorBase", Color.Lerp(blue, red, lerpTime));
         material.SetColor("_Emission", Color.Lerp(emissionBlue, emissionRed, lerpTime));
