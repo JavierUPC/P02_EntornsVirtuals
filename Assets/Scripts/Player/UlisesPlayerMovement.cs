@@ -8,13 +8,15 @@ public class UlisesPlayerMovement : MonoBehaviour
     public Animator animator;             // Referencia al Animator
     public Transform cameraRef;          // Referencia a la cámara
     public float speed = 5f;             // Velocidad al caminar
-    public float runSpeed = 8f, sensX = 0, sensY = 0;          // Velocidad al correr
+    public float runSpeed = 0, sensX = 0, sensY = 0;          // Velocidad al correr
     public float crouchSpeed = 2.5f;     // Velocidad al agacharse
     public float jumpForce = 5f;         // Fuerza del salto
     public Rigidbody rb;                 // Rigidbody del jugador
     public Transform groundCheck;        // Punto para verificar si el jugador está tocando el suelo
     public float groundDistance = 0.1f;  // Distancia para la verificación de suelo
     public LayerMask groundMask;         // Máscara de la capa del suelo
+
+    private float currentSpeed;
 
     public InputActionReference move, jump, rotate;
     private Vector2 rotationDelta;
@@ -72,11 +74,12 @@ public class UlisesPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
+        rb.velocity = new Vector3(moveDirection.x * currentSpeed, rb.velocity.y, moveDirection.z * currentSpeed);
     }
 
     void Update()
     {
+        
 
         Move();
 
@@ -103,7 +106,7 @@ public class UlisesPlayerMovement : MonoBehaviour
         movement = (forward * vertical + right * horizontal).normalized;
 
         // Ajustar velocidad base
-        float currentSpeed = speed;
+        
 
         // Estados de animación
         bool isWalking = movement.magnitude > 0 && vertical >= 0;
@@ -115,18 +118,24 @@ public class UlisesPlayerMovement : MonoBehaviour
         bool isDancing = Input.GetKey(KeyCode.B);
 
 
-
+        
 
         // Ajustar velocidad según el estado
         if (isRunning)
         {
             currentSpeed = runSpeed;
+
         }
         else if (isCrouching)
         {
             currentSpeed = crouchSpeed;
         }
+        else
+        {
+            currentSpeed = speed;
+        }
 
+        //Debug.Log(isRunning);
         // Aplicar movimiento al jugador
         //Vector3 velocity = movement * currentSpeed;
         //velocity.y = rb.velocity.y; // Mantener la velocidad vertical

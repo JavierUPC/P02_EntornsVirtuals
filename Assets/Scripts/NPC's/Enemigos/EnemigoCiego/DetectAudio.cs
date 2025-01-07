@@ -31,7 +31,7 @@ public class DetectAudio : MonoBehaviour
             detected = false;
             undetectedTime = 0;
         }
-        Debug.Log(detected);
+        //Debug.Log(detected);
     }
     public void OnRayHit(bool value)
     {
