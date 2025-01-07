@@ -7,8 +7,8 @@ public class PlayerActions : MonoBehaviour
 {
     public float moveSpeed = 0, runSpeed = 0, jumpForce = 0, sensX = 0, sensY = 0;
     public InputActionReference move, jump, rotate;
-    public InputActionAsset inputActions;
-    public Transform playerCam;
+   // public InputActionAsset inputActions;
+    
 
     private bool grounded;
     private Rigidbody rb;
@@ -43,8 +43,10 @@ public class PlayerActions : MonoBehaviour
     //JUMP
     private void Jump(InputAction.CallbackContext obj)
     {
+
         if (grounded)
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+
     }
     //------
 
@@ -89,17 +91,6 @@ public class PlayerActions : MonoBehaviour
 
         vertRot = rotationDelta.y * sensY * Time.deltaTime;
         horiRot = rotationDelta.x * sensX * Time.deltaTime;
-
-        //Evitar que la cámara rote de más
-        Vector3 currentRotation = playerCam.localEulerAngles;
-        float pitch = currentRotation.x;
-        if (pitch > 180) 
-            pitch -= 360; 
-        pitch = Mathf.Clamp(pitch - vertRot, -90f, 90f);
-        currentRotation.x = pitch;
-        //-------------------------------
-
-        playerCam.localEulerAngles = currentRotation;
         transform.Rotate(Vector3.up, horiRot);
     }
     //------

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class UlisesPlayerMovement : MonoBehaviour
 {
     public Animator animator;             // Referencia al Animator
     public Transform cameraRef;          // Referencia a la cámara
     public float speed = 5f;             // Velocidad al caminar
-    public float runSpeed = 8f;          // Velocidad al correr
+    public float runSpeed = 8f, sensX = 0, sensY = 0;          // Velocidad al correr
     public float crouchSpeed = 2.5f;     // Velocidad al agacharse
     public float jumpForce = 5f;         // Fuerza del salto
     public Rigidbody rb;                 // Rigidbody del jugador
@@ -13,13 +16,72 @@ public class UlisesPlayerMovement : MonoBehaviour
     public float groundDistance = 0.1f;  // Distancia para la verificación de suelo
     public LayerMask groundMask;         // Máscara de la capa del suelo
 
+    public InputActionReference move, jump, rotate;
+    private Vector2 rotationDelta;
+    private Vector3 moveDirection;
+    private float vertRot, horiRot;
+
     private Vector3 movement;            // Dirección de movimiento
     private bool isGrounded;             // Si está en el suelo
     private float yRotation = 0f;        // Rotación de la cámara en el eje Y (para rotar el jugador)
 
     bool _wasGrounded;
+
+    //ACTION EVENTLISTENERS
+    private void OnEnable()
+    {
+        jump.action.started += Jump;
+    }
+
+    private void OnDisable()
+    {
+        jump.action.started -= Jump;
+    }
+    //------
+
+
+    //JUMP
+    private void Jump(InputAction.CallbackContext obj)
+    {
+
+        if (isGrounded)
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            animator.SetBool("IsJumping", true);
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        }
+    }
+
+    private void Move()
+    {
+        Vector2 worldMoveDirection = move.action.ReadValue<Vector2>();
+        Vector3 worldDirection = new Vector3(worldMoveDirection.x, 0, worldMoveDirection.y);
+        moveDirection = transform.TransformDirection(worldDirection);
+
+        //Debug.Log("Move: " + moveDirection);
+    }
+
+    private void Rotate()
+    {
+        rotationDelta = rotate.action.ReadValue<Vector2>();
+
+        vertRot = rotationDelta.y * sensY * Time.deltaTime;
+        horiRot = rotationDelta.x * sensX * Time.deltaTime;
+        transform.Rotate(Vector3.up, horiRot);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
+    }
+
     void Update()
     {
+
+        Move();
+
+        Rotate();
+
         // Verificar si está tocando el suelo
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
         
@@ -66,14 +128,14 @@ public class UlisesPlayerMovement : MonoBehaviour
         }
 
         // Aplicar movimiento al jugador
-        Vector3 velocity = movement * currentSpeed;
-        velocity.y = rb.velocity.y; // Mantener la velocidad vertical
-        rb.velocity = velocity;
+        //Vector3 velocity = movement * currentSpeed;
+        //velocity.y = rb.velocity.y; // Mantener la velocidad vertical
+        //rb.velocity = velocity;
 
         // Rotar al jugador hacia la cámara
-        float mouseX = Input.GetAxis("Mouse X");
-        yRotation += mouseX;
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        //float mouseX = Input.GetAxis("Mouse X");
+        //yRotation += mouseX;
+        //transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
         // Configurar animaciones
         animator.SetBool("IsWalking", isWalking && !isRunning && !isCrouching);
@@ -89,14 +151,16 @@ public class UlisesPlayerMovement : MonoBehaviour
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
 
         // SALTO
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reiniciar la velocidad vertical
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);      // Aplicar fuerza de salto
-            animator.SetBool("IsJumping", true);                        // Activar animación de salto
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        //{
+        //    Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
+        //    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reiniciar la velocidad vertical
+        //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);      // Aplicar fuerza de salto
+        //    animator.SetBool("IsJumping", true);                        // Activar animación de salto
 
+        //}
+
+        
         // ACTIVAR CAÍDA
         if (!isGrounded && rb.velocity.y < 0) // Si no está en el suelo y está cayendo
         {
