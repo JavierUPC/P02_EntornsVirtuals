@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
-
-    public Animator animator;             // Referencia al Animator
-
+{
     public float moveSpeed = 0, runSpeed = 0, jumpForce = 0, sensX = 0, sensY = 0;
     public InputActionReference move, jump, rotate;
     public InputActionAsset inputActions;
+    public Transform playerCam;
 
     private bool grounded;
     private Rigidbody rb;
@@ -18,61 +17,8 @@ public class PlayerActions : MonoBehaviour
     private float speed;
     private float vertRot, horiRot;
 
-private Vector3 movement;            // Dirección de movimiento
-private bool isGrounded;             // Si está en el suelo
-private float yRotation = 0f;
-
-float horizontal = Input.GetAxis("Horizontal");
-float vertical = Input.GetAxis("Vertical");
-
-
-bool isWalking = movement.magnitude > 0 && vertical >= 0;
-bool isWalkingBack = vertical < 0;
-bool IsCrouchingBack = vertical < 0 && isWalkingBack;
-bool isCrouching = Input.GetKey(KeyCode.LeftControl);
-bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
-bool isCrouchWalking = isWalking && isCrouching;
-bool isDancing = Input.GetKey(KeyCode.B);
-
-// Configurar animaciones
-        animator.SetBool("IsWalking", isWalking && !isRunning && !isCrouching);
-        animator.SetBool("IsWalkingBack", isWalkingBack);
-        animator.SetBool("IsRunning", isRunning);
-        animator.SetBool("IsCrouching", isCrouching);
-        animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
-        animator.SetBool("IsDancing", isDancing);
-        animator.SetBool("IsCrouchingBack", IsCrouchingBack);
-
-
-        // Verificar si está tocando el suelo
-        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance, groundMask);
-
-        // SALTO
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            Debug.Log("SALTANDO");  // Si esto no se muestra, es que el salto no se está ejecutando
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reiniciar la velocidad vertical
-    rb.AddForce(Vector3.up* jumpForce, ForceMode.Impulse);      // Aplicar fuerza de salto
-            animator.SetBool("IsJumping", true);                        // Activar animación de salto
-        }
-
-// ACTIVAR CAÍDA
-if (!isGrounded && rb.velocity.y < 0) // Si no está en el suelo y está cayendo
-{
-    animator.SetBool("IsFalling", true); // Activar la animación de caída
-}
-
-// DETECTAR ATERRIZAJE
-if (!_wasGrounded && isGrounded) // Si estaba en el aire y ahora está en el suelo
-{
-    animator.SetBool("IsJumping", false); // Finalizar animación de salto
-    animator.SetBool("IsFalling", false); // Finalizar animación de caída
-    animator.SetTrigger("Landed");    // Activar animación de aterrizaje
-    Debug.Log("Aterrizado");
-}
-
-// Start is called before the first frame update
-void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -117,17 +63,15 @@ void Start()
 
 
     //FIXEDUPDATE
-    public void FixedUpdate()
+    private void FixedUpdate()
     { 
         rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
-
-        if(!grounded && )
     }
     //------
 
 
     //MOVE
-    public void Move()
+    private void Move()
     {
         Vector2 worldMoveDirection = move.action.ReadValue<Vector2>();
         Vector3 worldDirection = new Vector3(worldMoveDirection.x, 0, worldMoveDirection.y);
@@ -139,7 +83,7 @@ void Start()
 
 
     //ROTATE    
-    public void Rotate()
+    private void Rotate()
     {
         rotationDelta = rotate.action.ReadValue<Vector2>();
 
@@ -147,13 +91,21 @@ void Start()
         horiRot = rotationDelta.x * sensX * Time.deltaTime;
 
         //Evitar que la cámara rote de más
+        Vector3 currentRotation = playerCam.localEulerAngles;
+        float pitch = currentRotation.x;
+        if (pitch > 180) 
+            pitch -= 360; 
+        pitch = Mathf.Clamp(pitch - vertRot, -90f, 90f);
+        currentRotation.x = pitch;
+        //-------------------------------
 
+        playerCam.localEulerAngles = currentRotation;
         transform.Rotate(Vector3.up, horiRot);
     }
     //------
 
     //RUN
-    public void Run()
+    private void Run()
     {
         if (Input.GetKey(KeyCode.LeftShift))
             speed = runSpeed;
@@ -164,16 +116,15 @@ void Start()
 
 
     //GROUNDED
-    public void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Terrain"))
+        if (collision.gameObject.CompareTag("Ground"))
             grounded = true;
     }
-    
 
-    public void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Terrain"))
+        if (collision.gameObject.CompareTag("Ground"))
             grounded = false;
     }
     //--------
