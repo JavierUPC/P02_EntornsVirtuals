@@ -6,9 +6,10 @@ public class TriggerStarCreation : MonoBehaviour
 {
     public StarPoolManager starPoolManager;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player")) // Asegúrate de usar la tag "Player" para tu personaje
+
+        if (collision.collider.CompareTag("Player")) // Asegúrate de usar la tag "Player" para tu personaje
         {
             Debug.Log("Collision detected");
             starPoolManager.TriggerStars(transform.position);

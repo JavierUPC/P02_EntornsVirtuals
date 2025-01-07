@@ -33,6 +33,7 @@ public class StarPoolManager : MonoBehaviour
     public void TriggerStars(Vector3 triggerPosition)
     {
         // Mover el GameObject a la posición del trigger
+        Debug.Log("Entered triggerStars");
         transform.position = triggerPosition;
         StartCoroutine(StarAnimation());
     }

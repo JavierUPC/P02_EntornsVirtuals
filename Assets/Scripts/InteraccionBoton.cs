@@ -9,7 +9,7 @@ public class InteraccionBoton : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             abrirPuertaScript.BotonTocado(this.gameObject);
-            Debug.Log("Contacto");
+            //Debug.Log("Contacto");
         }
     }
 }
