@@ -11,9 +11,12 @@ public class TorchLight : MonoBehaviour
     public float maxIntensity = 2.5f;
     public float minRange = 5f;
     public float maxRange = 8f;
-    public float flickerSpeed = 0.1f;
+    public float flickerSpeed = 0.1f; // Velocidad de los cambios
+    public float smoothSpeed = 5f; // Velocidad de suavizado
 
-    private float flickerTimer = 0f;
+    private float targetIntensity;
+    private float targetRange;
+    private Color targetColor;
 
     void Start()
     {
@@ -21,24 +24,26 @@ public class TorchLight : MonoBehaviour
         {
             torchLight = GetComponent<Light>();
         }
+
+        // Inicializar valores objetivos
+        targetIntensity = Random.Range(minIntensity, maxIntensity);
+        targetRange = Random.Range(minRange, maxRange);
+        targetColor = Color.Lerp(color1, color2, Random.value);
     }
 
     void Update()
     {
-        flickerTimer += Time.deltaTime;
+        // Actualizar suavemente los valores actuales hacia los objetivos
+        torchLight.intensity = Mathf.Lerp(torchLight.intensity, targetIntensity, smoothSpeed * Time.deltaTime);
+        torchLight.range = Mathf.Lerp(torchLight.range, targetRange, smoothSpeed * Time.deltaTime);
+        torchLight.color = Color.Lerp(torchLight.color, targetColor, smoothSpeed * Time.deltaTime);
 
-        if (flickerTimer >= flickerSpeed)
+        // Cambiar objetivos a intervalos de tiempo
+        if (Time.time % flickerSpeed < Time.deltaTime)
         {
-            // Cambiar intensidad
-            torchLight.intensity = Random.Range(minIntensity, maxIntensity);
-
-            // Cambiar rango
-            torchLight.range = Random.Range(minRange, maxRange);
-
-            // Cambiar color entre dos colores
-            torchLight.color = Color.Lerp(color1, color2, Random.value);
-
-            flickerTimer = 0f;
+            targetIntensity = Random.Range(minIntensity, maxIntensity);
+            targetRange = Random.Range(minRange, maxRange);
+            targetColor = Color.Lerp(color1, color2, Random.value);
         }
     }
 }
