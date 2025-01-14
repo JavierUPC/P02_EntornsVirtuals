@@ -154,6 +154,8 @@ public class UlisesPlayerMovement : MonoBehaviour
         animator.SetBool("IsCrouchWalking", isWalking && isCrouching);
         animator.SetBool("IsDancing", isDancing);
         animator.SetBool("IsCrouchingBack", IsCrouchingBack);
+        animator.SetBool("IsLanding", true);
+
 
 
         // Verificar si está tocando el suelo
@@ -168,6 +170,21 @@ public class UlisesPlayerMovement : MonoBehaviour
         //    animator.SetBool("IsJumping", true);                        // Activar animación de salto
 
         //}
+        // DETECTAR ATERRIZAJE
+        if (!_wasGrounded && isGrounded) // Si estaba en el aire y ahora está en el suelo
+        {
+            animator.SetBool("IsJumping", false); // Finalizar animación de salto
+            animator.SetBool("IsFalling", false); // Finalizar animación de caída
+            animator.SetBool("IsLanding", true);  // Activar animación de aterrizaje
+            animator.SetTrigger("Landed");        // Activar trigger de aterrizaje
+            Debug.Log("Aterrizado");
+        }
+
+        // Desactivar "IsLanding" después de un tiempo
+        if (animator.GetBool("IsLanding") && !_wasGrounded) // Si el bool sigue activado pero ya pasó el aterrizaje
+        {
+            animator.SetBool("IsLanding", false);
+        }
 
 
         // ACTIVAR CAÍDA
